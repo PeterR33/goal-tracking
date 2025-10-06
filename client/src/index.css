@@ -1,0 +1,249 @@
+/* --- Base / reset --- */
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  color: #0f172a;
+  /* Corkboard feel: soft paper with dots */
+  background: radial-gradient(#e5e7eb 1px, transparent 1px) 0 0/22px 22px,
+    #f7f4ef; /* warm paper */
+}
+
+/* --- Layout containers --- */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+}
+.lede {
+  margin: 18px 0 6px;
+  color: #6b7280;
+}
+
+/* --- Site header --- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(6px);
+  background: rgba(247, 244, 239, 0.8);
+  border-bottom: 1px solid #e5e7eb;
+}
+.site-header__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 20px;
+}
+.brand__dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #111827;
+  display: inline-block;
+}
+.brand__name {
+  letter-spacing: 0.2px;
+}
+
+/* --- Buttons --- */
+.btn {
+  border: none;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.btn-primary {
+  background: #111827;
+  color: #fff;
+}
+.btn-primary:hover {
+  filter: brightness(1.05);
+}
+
+/* --- Pinboard grid (unchanged) --- */
+.pinboard {
+  margin-top: 24px;
+  padding: 18px;
+  border-radius: 14px;
+  background: radial-gradient(#e5e7eb 1px, transparent 1px) 0 0/24px 24px, #fff;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  display: grid;
+  gap: 20px;
+}
+@media (min-width: 640px) {
+  .pinboard {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 900px) {
+  .pinboard {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1280px) {
+  .pinboard {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* --- Sticky note cards (your existing classes) --- */
+.card {
+  width: 100%;
+  min-height: 160px;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.12);
+  transform: rotate(-1.3deg);
+  display: flex;
+  flex-direction: column;
+}
+.card .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.card .due {
+  font-size: 11px;
+  color: rgba(17, 24, 39, 0.7);
+}
+.card h3 {
+  margin: 6px 0 0;
+  font-size: 18px;
+  font-weight: 800;
+}
+.card .strike {
+  text-decoration: line-through;
+  color: #4b5563;
+}
+.card .actions {
+  margin-top: auto;
+  display: flex;
+  justify-content: flex-end;
+}
+.card .link {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-size: 13px;
+  text-decoration: underline;
+  color: #1f2937;
+  cursor: pointer;
+}
+
+/* Priority colors */
+.priority-1 {
+  background: #fde68a;
+} /* yellow */
+.priority-2 {
+  background: #bbf7d0;
+} /* green */
+.priority-3 {
+  background: #bae6fd;
+} /* light blue; feel free to swap to taste */
+
+/* --- Form (used inside modal) --- */
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  align-items: flex-end;
+  margin-top: 8px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 220px;
+}
+.form label {
+  font-size: 12px;
+  color: #374151;
+  margin-bottom: 6px;
+}
+.input,
+.select,
+.date {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 14px;
+  outline: none;
+}
+.input:focus,
+.select:focus,
+.date:focus {
+  border-color: #a1a1aa;
+}
+
+/* --- Modal --- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+.modal {
+  width: 100%;
+  max-width: 560px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  animation: pop 0.15s ease-out;
+}
+@keyframes pop {
+  from {
+    transform: translateY(6px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid #eef2f7;
+}
+.modal-header h2 {
+  margin: 0;
+  font-size: 18px;
+}
+.modal-close {
+  background: #111827;
+  color: #fff;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+}
+.modal-body {
+  padding: 18px;
+}
