@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
-    "render-build": "npm ci --prefix ../client || npm install --prefix ../client && npm run --prefix ../client build"
+    "render-build": "npm ci --prefix ../client --include=dev || npm install --prefix ../client --include=dev && npm run --prefix ../client build"
   },
   "keywords": [],
   "author": "",
